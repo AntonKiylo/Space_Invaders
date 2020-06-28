@@ -1,19 +1,57 @@
-#main {
+#root {
   width: 800px;
   height: 800px;
-  background: url(./../assets/bg.jpg) no-repeat;
-  background-size: cover;
-  margin: 20px auto;
   border-radius: 24px;
   font-family: 'Righteous', cursive;
   text-align: center;
   color: #fff;
   overflow: hidden;
+  margin: 20px auto;
 }
 
-#main #play #invadersBlock {
+#root #play {
+  position: relative;
+}
+
+#root #play #gameWrapper {
+  position: absolute;
+  top: 0;
+}
+
+#root #play #gameWrapper #resultInformation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 20px 30px 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 25px;
+}
+
+#root #play #gameWrapper #resultInformation #gameLives {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 55px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#root #play #gameWrapper #resultInformation #gameLives img {
+  width: 30px;
+}
+
+#root #play #gameWrapper #gameField {
   width: 800px;
-  height: 800px;
+  height: 720px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,113 +59,131 @@
       flex-wrap: wrap;
 }
 
-#main #play #invadersBlock div {
+#root #play #gameWrapper #gameField div {
   width: 5%;
-  height: 5%;
+  height: 3.2%;
 }
 
-#main #play #invadersBlock .invader {
+#root #play #gameWrapper #gameField .invader {
   background: url("../assets/alien.png") no-repeat center;
   background-size: contain;
 }
 
-#main #play #invadersBlock .shooter {
+#root #play #gameWrapper #gameField .shooter {
   background: url("../assets/4.png") no-repeat center;
-  background-size: contain;
-  border-radius: 50%;
-}
-
-#main #play #invadersBlock .boom {
-  background: url("../assets/explosion.png") no-repeat center;
   background-size: cover;
 }
 
-#main #play #invadersBlock .laser {
-  background-color: green;
+#root #play #gameWrapper #gameField .explosion {
+  background: url("../assets/explosion.png") no-repeat center;
+  background-size: contain;
+}
+
+#root #play #gameWrapper #gameField .laser {
+  background-color: #f9b104;
   width: 4px;
   margin: 0 auto;
 }
 
-#main #mainMenu {
-  padding: 20px;
+#root #play #gameWrapper #gameField .invaderLaser {
+  background: url("../assets/invaderLaser.png") no-repeat center;
+  background-size: contain;
 }
 
-#main #mainMenu > div:first-child {
-  width: 500px;
-  margin: 0 auto;
-  font-size: 90px;
-  text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+#root #mainMenu {
+  background: url(../assets/background.png) no-repeat;
+  background-size: cover;
+  height: 100%;
 }
 
-#main #mainMenu img {
-  width: 460px;
-  margin: 0 auto;
-  display: block;
+#root #mainMenu img {
+  margin-top: 280px;
 }
 
-#main #mainMenu .buttonBlock {
-  padding-top: 50px;
+#root #mainMenu .buttonBlock {
+  margin-top: 184px;
 }
 
-#main #userScore {
+#root #userScore {
+  background: url(../assets/bestResult.png) no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+#root #userScore p {
+  display: inline-block;
+  font-size: 61px;
+  margin: 475px 0 0;
+}
+
+#root #userScore .buttonBlock {
+  margin-top: 119px;
+}
+
+#root #gameHelp {
   padding: 20px;
   font-size: 25px;
 }
 
-#main #userScore > div:first-child {
-  padding-top: 25%;
-}
-
-#main #userScore .buttonBlock {
-  padding-top: 306px;
-}
-
-#main #gameHelp {
-  padding: 20px;
-  font-size: 25px;
-}
-
-#main #gameHelp h3, #main #gameHelp span {
+#root #gameHelp h3, #root #gameHelp span {
   text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
 }
 
-#main #gameHelp .buttonBlock {
+#root #gameHelp .buttonBlock {
   padding-top: 171px;
 }
 
-#main .buttonBlock {
+#root #gameEnd {
+  background: url(../assets/gameOver.png) no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+#root #gameEnd p {
+  font-size: 60px;
+  display: inline-block;
+  margin: 475px 0 0;
+}
+
+#root #gameEnd .buttonBlock {
+  margin-top: 120px;
+}
+
+#root .buttonBlock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  color: #fff;
 }
 
-#main .buttonBlock .menuButton {
-  text-shadow: 0 0 10px #fff;
-  border: 2px solid #09295e;
-  line-height: 4;
-  font-size: 26px;
-  background-color: rgba(0, 11, 160, 0.3);
+#root .buttonBlock .button {
+  border: 2px solid #f9b104;
+  line-height: 2;
+  font-size: 27px;
   border-radius: 30px;
-  width: 120px;
-  height: 100px;
-  -webkit-box-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
-          box-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+  width: 150px;
+  height: 54px;
+  -webkit-transition: 500ms;
+  transition: 500ms;
+  cursor: pointer;
+}
+
+#root .buttonBlock .button:hover {
+  color: #f9b104;
+}
+
+#root .buttonBlock .button a {
+  text-decoration: none;
+  display: block;
+  color: #fff;
   -webkit-transition: 500ms;
   transition: 500ms;
 }
 
-#main .buttonBlock .menuButton:hover {
-  text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-#main .buttonBlock .menuButton a {
-  text-decoration: none;
-  display: block;
-  color: #fff;
+#root .buttonBlock .button a:hover {
+  color: #f9b104;
 }
 /*# sourceMappingURL=style.css.map */
