@@ -7,7 +7,7 @@ const MainMenu = {
             <img src="./assets/spaceInvaders.png" alt="game_logo">
             <div class="buttonBlock">
                 <div id="play" class="button"><a href="#play">PLAY</a></div>
-                <div id="music" class="button">UNMUTE</div>
+                <div id="music" class="button">${buttonIsPressed.soundButtonState}</div>
                 <div id="score" class="button"><a href="#score">SCORE</a></div>
                 <div id="help" class="button"><a href="#help">HELP</a></div>
             </div>
@@ -91,6 +91,7 @@ const buttonIsPressed = {
     left: false,
     right: false,
     shoot: false,
+    soundButtonState: "UNMUTE",
 };
 
 const canvasVariables = {

@@ -213,7 +213,7 @@ function drawGame() {
         };
 
         if (gameState) {
-            setTimeout(shooterAttack, 500);
+            setTimeout(shooterAttack, 200);
         } else {
             return;
         };
@@ -362,11 +362,13 @@ function toggleBackgroundSound() {
     let toggleSoundButton = document.getElementById("music"),
         backgroundSound = document.getElementById("backgroundSound");
     toggleSoundButton.addEventListener("click", function () {
-        if (toggleSoundButton.innerHTML === "UNMUTE") {
-            toggleSoundButton.innerHTML = "MUTE";
+        if (buttonIsPressed.soundButtonState === "UNMUTE") {
+            buttonIsPressed.soundButtonState = "MUTE";
+            toggleSoundButton.innerHTML = buttonIsPressed.soundButtonState;
             backgroundSound.play();
-        } else if (toggleSoundButton.innerHTML === "MUTE") {
-            toggleSoundButton.innerHTML = "UNMUTE";
+        } else if (buttonIsPressed.soundButtonState = "MUTE") {
+            buttonIsPressed.soundButtonState = "UNMUTE";
+            toggleSoundButton.innerHTML = buttonIsPressed.soundButtonState;
             backgroundSound.pause();
         };
     });
