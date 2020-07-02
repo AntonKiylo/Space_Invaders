@@ -38,9 +38,9 @@
                     height: 3.2%;
                 }
                 .invader{
-                    background: url("../assets/invader.png") no-repeat center;
-                    background-size: contain;
-                    
+                    background: url("../assets/spaceInvadersSprite.png") 0 -8px no-repeat;
+                    background-size: 78px;
+                    animation: invadersAnimate 1s steps(2) infinite;
                 }
                 .shooter{
                     background: url("../assets/shooter.png") no-repeat center;
@@ -65,14 +65,14 @@
     }
 
     #mainMenu{
-        background: url(../assets/background.png) no-repeat;
+        background: url(../assets/mainMenu.png) no-repeat;
         background-size: cover;
         height: 100%;
         img{
-            margin-top: 280px;
+            margin: 280px 0 0 3px;
         }
         .buttonBlock{
-            margin-top: 184px;
+            margin-top: 186px;
         }
     }
 
@@ -86,18 +86,46 @@
             margin: 475px 0 0;
         }
         .buttonBlock{
-            margin-top: 119px;
+            justify-content: space-between;
+            width: 43%;
+            margin: 120px auto 0;
         }
     }
 
     #gameHelp{
-        padding: 20px;
-        font-size: 25px;
-        h3, span{
-            text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+        background: url(../assets/gameHelp.png) no-repeat;
+        background-size: cover;
+        height: 100%;
+        >div:first-child{
+            p:first-child{
+                display: inline-block;
+                width: 80%;
+                margin-top: 91px;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 20px;
+                line-height: 30px;
+                color: #f9b104;
+            }
+            p:nth-child(2){
+                font-size: 60px;
+            }
+            p:nth-child(3), p:nth-child(3) ~ p, pre{
+                font-family: 'Montserrat', sans-serif;
+                font-size: 30px;
+                text-align: left;
+                width: 70%;
+                margin: 10px 0 0 200px;
+            }
+            span{
+                font-size: 31px;
+                font-family: 'Righteous', cursive;
+                color: #f9b104;
+            }
         }
         .buttonBlock{
-            padding-top: 171px;
+            justify-content: space-between;
+            width: 43%;
+            margin: 103px auto 0;
         }
     }
 
@@ -111,7 +139,9 @@
             margin: 475px 0 0;
         }
         .buttonBlock{
-            margin-top: 120px;
+            justify-content: space-between;
+            width: 43%;
+            margin: 121px auto 0;
         }
     }
 
@@ -141,5 +171,11 @@
                 }
             }
         }
+    }
+}
+
+@keyframes invadersAnimate {
+    100% {
+        background-position: -78px -8px;
     }
 }

@@ -1,3 +1,5 @@
+"use strict";
+
 const MainMenu = {
     render: () => {
         return `
@@ -28,7 +30,6 @@ const Play = {
                 </div>
                 <div id="gameField"></div>
             </div>
-            <audio id="soundEffects"></audio>
         </div>`;
     }
 }
@@ -52,14 +53,14 @@ const GameHelp = {
         <div id="gameHelp">
             <div>
                 <p>The aim of the game is to destroy all the invaders floating (or hurtling) around the screen, whilst dodging the attacks of flying saucers, which you can also destroy for even more points.</p>
-                <h3>CONTROLS</h3>
-                <p><span>LEFT ARROW</span> 	-	Move left</p>
-                <p><span>RIGHT ARROW</span>	-	Move right</p>
-                <p><span>SPACE</span>	-	Fire (hold to shoot continuously)</p>
+                <p>CONTROLS</p>
+                <p><span>LEFT ARROW</span> 	-	move left</p>
+                <p><span>RIGHT ARROW</span>	-	move right</p>
+                <p><span>SPACE</span>	-	fire (hold to shoot <pre>               continuously)</pre></p>
             </div>
             <div class="buttonBlock">
-                <div id="play" class="menuButton"><a href="#play">PLAY</a></div>
-                <div id="gameMenu" class="menuButton"><a href="#menu">MENU</a></div>
+                <div id="play" class="button"><a href="#play">PLAY</a></div>
+                <div id="gameMenu" class="button"><a href="#menu">MENU</a></div>
             </div>
         </div >`;
     }

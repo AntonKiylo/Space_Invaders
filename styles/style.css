@@ -65,12 +65,14 @@
 }
 
 #root #play #gameWrapper #gameField .invader {
-  background: url("../assets/alien.png") no-repeat center;
-  background-size: contain;
+  background: url("../assets/spaceInvadersSprite.png") 0 -8px no-repeat;
+  background-size: 78px;
+  -webkit-animation: invadersAnimate 1s steps(2) infinite;
+          animation: invadersAnimate 1s steps(2) infinite;
 }
 
 #root #play #gameWrapper #gameField .shooter {
-  background: url("../assets/4.png") no-repeat center;
+  background: url("../assets/shooter.png") no-repeat center;
   background-size: cover;
 }
 
@@ -91,17 +93,17 @@
 }
 
 #root #mainMenu {
-  background: url(../assets/background.png) no-repeat;
+  background: url(../assets/mainMenu.png) no-repeat;
   background-size: cover;
   height: 100%;
 }
 
 #root #mainMenu img {
-  margin-top: 280px;
+  margin: 280px 0 0 3px;
 }
 
 #root #mainMenu .buttonBlock {
-  margin-top: 184px;
+  margin-top: 186px;
 }
 
 #root #userScore {
@@ -117,20 +119,53 @@
 }
 
 #root #userScore .buttonBlock {
-  margin-top: 119px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 43%;
+  margin: 120px auto 0;
 }
 
 #root #gameHelp {
-  padding: 20px;
-  font-size: 25px;
+  background: url(../assets/gameHelp.png) no-repeat;
+  background-size: cover;
+  height: 100%;
 }
 
-#root #gameHelp h3, #root #gameHelp span {
-  text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+#root #gameHelp > div:first-child p:first-child {
+  display: inline-block;
+  width: 80%;
+  margin-top: 91px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+  color: #f9b104;
+}
+
+#root #gameHelp > div:first-child p:nth-child(2) {
+  font-size: 60px;
+}
+
+#root #gameHelp > div:first-child p:nth-child(3), #root #gameHelp > div:first-child p:nth-child(3) ~ p, #root #gameHelp > div:first-child pre {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  text-align: left;
+  width: 70%;
+  margin: 10px 0 0 200px;
+}
+
+#root #gameHelp > div:first-child span {
+  font-size: 31px;
+  font-family: 'Righteous', cursive;
+  color: #f9b104;
 }
 
 #root #gameHelp .buttonBlock {
-  padding-top: 171px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 43%;
+  margin: 103px auto 0;
 }
 
 #root #gameEnd {
@@ -146,7 +181,11 @@
 }
 
 #root #gameEnd .buttonBlock {
-  margin-top: 120px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 43%;
+  margin: 121px auto 0;
 }
 
 #root .buttonBlock {
@@ -185,5 +224,17 @@
 
 #root .buttonBlock .button a:hover {
   color: #f9b104;
+}
+
+@-webkit-keyframes invadersAnimate {
+  100% {
+    background-position: -78px -8px;
+  }
+}
+
+@keyframes invadersAnimate {
+  100% {
+    background-position: -78px -8px;
+  }
 }
 /*# sourceMappingURL=style.css.map */

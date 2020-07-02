@@ -1,9 +1,9 @@
-
-// TODO : remove class "shooter after third alien shoot"
+"use strict";
 
 function drawGame() {
     let gameField = document.getElementById("gameField"),
-        soundEffects = document.getElementById("soundEffects"),
+        explosionSound = new Audio("./assets/explosion.wav"),
+        shooterAttackSound = new Audio("./assets/shoot.wav"),
         gameLivesContainer = document.getElementById("gameLivesContainer"),
         gameScore = document.getElementById("gameScore"),
         gameBlocks = null,
@@ -42,7 +42,7 @@ function drawGame() {
     drawFlyingStars();
     document.addEventListener('keydown', setPressedTrue);
     document.addEventListener('keyup', setPressedFalse);
-    
+
     /*****************************************************************/
 
     function moveInvaders() {
@@ -72,8 +72,7 @@ function drawGame() {
         if (gameBlocks[currentShooterIndex].classList.contains("invader", "shooter")) {
             liveCounter = 0;
             gameLivesContainer.innerHTML = liveCounter;
-            soundEffects.src = "./assets/explosion.wav";
-            soundEffects.play();
+            explosionSound.play();
             gameBlocks[currentShooterIndex].classList.add("explosion");
             endGame();
             return;
@@ -118,17 +117,27 @@ function drawGame() {
             gameBlocks[invaderLaserIndex].classList.remove("invaderLaser");
             invaderLaserIndex += width;
             gameBlocks[invaderLaserIndex].classList.add("invaderLaser");
-            
+
             if (gameBlocks[currentShooterIndex].classList.contains("invaderLaser")) {
-                soundEffects.src = "./assets/explosion.wav";
-                soundEffects.play();
+                explosionSound.play();
+                buttonIsPressed.left = false;
+                buttonIsPressed.right = false;
+
+                document.removeEventListener("keydown", setPressedTrue);
+                document.removeEventListener("keyup", setPressedFalse);
+                
                 gameBlocks[currentShooterIndex].classList.remove("shooter");
                 gameBlocks[currentShooterIndex].classList.add("explosion");
-                setTimeout(() => gameBlocks[currentShooterIndex].classList.remove("explosion"), 250);
+                let explosion = setTimeout(() => gameBlocks[currentShooterIndex].classList.remove("explosion"), 250);
                 liveCounter--;
                 gameLivesContainer.innerHTML = liveCounter;
-                
+                setTimeout(() => {
+                    document.addEventListener('keydown', setPressedTrue);
+                    document.addEventListener('keyup', setPressedFalse);
+                }, 250);
+
                 if (liveCounter === 0) {
+                    clearTimeout(explosion);
                     endGame();
                 };
             };
@@ -140,7 +149,7 @@ function drawGame() {
 
             setTimeout(invaderShoot, 40);
         };
-        
+
         if (gameState) {
             setTimeout(invadersAttack, Math.floor(Math.random() * 1800) + 700);
         } else {
@@ -165,13 +174,12 @@ function drawGame() {
 
         gameBlocks[currentShooterIndex].classList.add("shooter");
 
-        requestAnimationFrame(moveShooter);
+        setTimeout(moveShooter, 40);
     };
 
     function shooterAttack() {
         if (buttonIsPressed.shoot) {
-            soundEffects.src = "./assets/shoot.wav";
-            soundEffects.play();
+            shooterAttackSound.play();
 
             let currentLaserIndex = currentShooterIndex;
 
@@ -186,8 +194,7 @@ function drawGame() {
                 };
 
                 if (gameBlocks[currentLaserIndex].classList.contains("invader")) {
-                    soundEffects.src = "./assets/explosion.wav";
-                    soundEffects.play();
+                    explosionSound.play();
                     gameBlocks[currentLaserIndex].classList.remove("laser");
                     gameBlocks[currentLaserIndex].classList.remove("invader");
                     gameBlocks[currentLaserIndex].classList.add("explosion");
@@ -200,32 +207,32 @@ function drawGame() {
 
                     return;
                 };
-
                 requestAnimationFrame(moveLaser);
-                
             };
-
             moveLaser();
-            
         };
 
-        setTimeout(shooterAttack, 100);
-        
+        if (gameState) {
+            setTimeout(shooterAttack, 500);
+        } else {
+            return;
+        };
     };
 
     function endGame() {
         gameState = false;
+
         document.removeEventListener("keydown", setPressedTrue);
         document.removeEventListener("keyup", setPressedFalse);
-        
+
         let userScore = localStorage.getItem('userScore');
-        
+
         if (!userScore) {
             localStorage.setItem('userScore', JSON.stringify({
                 score: gameScore.innerHTML,
             }));
         }
-        
+
         if (userScore) {
             let user = JSON.parse(userScore);
 
@@ -240,7 +247,7 @@ function drawGame() {
             window.location.hash = "#end";
         }, 2000);
     };
-    
+
     function drawFlyingStars() {
         canvasVariables.canvas = document.getElementById("canvas");
         canvasVariables.ctx = canvasVariables.canvas.getContext("2d");
@@ -261,7 +268,12 @@ function drawGame() {
         function animateStars() {
             flyingStarsUpdate();
             drawStars();
-            requestAnimationFrame(animateStars);
+            if (gameState) {
+                requestAnimationFrame(animateStars);
+            } else {
+                canvasVariables.starsArray.length = 0;
+                return;
+            };
         };
 
         function clearCanvasField() {
@@ -271,7 +283,7 @@ function drawGame() {
 
         function createStars() {
             canvasVariables.starsArray.push(new Stars);
-            
+
             if (canvasVariables.starsArray.length === canvasVariables.starsQuantity) {
                 clearInterval(canvasVariables.starsTimer);
             };
@@ -336,7 +348,6 @@ function drawGame() {
     };
 };
 
-
 function getScore() {
     let bestScore = document.getElementById("bestScore");
     let userScore = localStorage.getItem('userScore');
@@ -347,15 +358,14 @@ function getScore() {
     };
 };
 
-
 function toggleBackgroundSound() {
     let toggleSoundButton = document.getElementById("music"),
         backgroundSound = document.getElementById("backgroundSound");
-    toggleSoundButton.addEventListener("click", function(){
-        if (toggleSoundButton.innerHTML === "UNMUTE"){
+    toggleSoundButton.addEventListener("click", function () {
+        if (toggleSoundButton.innerHTML === "UNMUTE") {
             toggleSoundButton.innerHTML = "MUTE";
             backgroundSound.play();
-        } else {
+        } else if (toggleSoundButton.innerHTML === "MUTE") {
             toggleSoundButton.innerHTML = "UNMUTE";
             backgroundSound.pause();
         };
