@@ -13,8 +13,8 @@ function checkHash() {
 
 function updateWindowView() {
     document.getElementById("root").innerHTML = router[window.location.hash.slice(1)].render();
-    
-    if (window.location.hash.slice(1) === "play") {   
+
+    if (window.location.hash.slice(1) === "play") {
         drawGame();
         return;
     } else if (window.location.hash.slice(1) === "score") {

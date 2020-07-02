@@ -3,6 +3,7 @@
 function drawGame() {
     let gameField = document.getElementById("gameField"),
         explosionSound = new Audio("./assets/explosion.wav"),
+        invaderExplosion = new Audio("./assets/hitSound.mp3"),
         shooterAttackSound = new Audio("./assets/shoot.wav"),
         gameLivesContainer = document.getElementById("gameLivesContainer"),
         gameScore = document.getElementById("gameScore"),
@@ -125,7 +126,7 @@ function drawGame() {
 
                 document.removeEventListener("keydown", setPressedTrue);
                 document.removeEventListener("keyup", setPressedFalse);
-                
+
                 gameBlocks[currentShooterIndex].classList.remove("shooter");
                 gameBlocks[currentShooterIndex].classList.add("explosion");
                 let explosion = setTimeout(() => gameBlocks[currentShooterIndex].classList.remove("explosion"), 250);
@@ -194,7 +195,7 @@ function drawGame() {
                 };
 
                 if (gameBlocks[currentLaserIndex].classList.contains("invader")) {
-                    explosionSound.play();
+                    invaderExplosion.play();
                     gameBlocks[currentLaserIndex].classList.remove("laser");
                     gameBlocks[currentLaserIndex].classList.remove("invader");
                     gameBlocks[currentLaserIndex].classList.add("explosion");
